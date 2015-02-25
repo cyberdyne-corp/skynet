@@ -1,6 +1,6 @@
-# docker-CRN
+# docker-CRPH
 
-A stack used to automatically register Docker container hosting webapps as services in Consul and distribute them using Nginx.
+A stack used to automatically register Docker container hosting webapps as services in Consul, distribute them using HAProxy and monitor it with Prometheus.
 
 # About
 
@@ -9,8 +9,8 @@ Powered by the following tools:
 * Fig: a tool used to manage an application in distributed containers.
 > See: http://www.fig.sh/
 
-* Nginx: an HTTP and reverse proxy server.
-> See: http://nginx.org/
+* HAProxy: a TCP/HTTP load balancer.
+> See: http://www.haproxy.org/
 
 * Consul: a tool for discovering and configuring services in your infrastructure.
 > See: https://www.consul.io/
@@ -20,6 +20,9 @@ Powered by the following tools:
 
 * Registrator: a tool that automatically register/deregister Docker containers into Consul.
 > See: https://github.com/gliderlabs/registrator
+
+* Prometheus: An open-source service monitoring system and time series database.
+> See: http://prometheus.io/
 
 # How to
 
@@ -39,7 +42,7 @@ Update the *fig.yml* file and replace *ROUTABLE_IP* with a routable IP address (
 
 ### Start it
 
-Start the Nginx + Consul + Registrator stack:
+Start the stack:
 
 ````
 $ fig pull & fig build
@@ -51,12 +54,21 @@ $ fig up -d
 You'll need to have a containerized webapp available.
 
 ````
-$ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d sitea
+$ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d tutum/hello-world
 ````
 
 Point your browser at http://localhost to see the result.
 
-### Consul UI
+### Consul
 
-Access the Consul UI via http://localhost:8500
+You can place different configuration files in consul/config, they will be loaded by Consul.
 
+You can place your watch handlers inside consul/handlers, it will be map on the container in */handlers*.
+
+You can access the Consul UI via http://localhost:8500
+
+### Prometheus
+
+Access the Prometheus UI via http://localhost:9090
+
+Access the Prometheus Gateway UI via http://localhost:9091

@@ -1,17 +1,17 @@
-FROM nginx:1.7
+FROM haproxy:1.5
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update -qq && \
-    apt-get -y install curl runit && \
+    apt-get -y install curl && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CT_URL https://github.com/hashicorp/consul-template/releases/download/v0.6.5/consul-template_0.6.5_linux_amd64.tar.gz
 RUN curl -L $CT_URL | tar -C /usr/local/bin --strip-components 1 -zxf -
 
-ADD nginx.service /etc/service/nginx/run
-ADD consul-template.service /etc/service/consul-template/run
+COPY startup.sh /tmp/startup.sh
+RUN chmod +x /tmp/startup.sh
+COPY reload.sh /tmp/reload.sh
+RUN chmod +x /tmp/reload.sh
+COPY haproxy.ctmpl /etc/consul-templates/haproxy.ctmpl
 
-RUN rm -v /etc/nginx/conf.d/*
-ADD nginx.conf /etc/consul-templates/nginx.conf
-
-CMD ["/usr/bin/runsvdir", "/etc/service"]
+CMD ["/tmp/startup.sh"]
