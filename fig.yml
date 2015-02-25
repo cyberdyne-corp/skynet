@@ -6,15 +6,19 @@ loadbalancer:
   - "80:80"
 
 consul:
-  command: -server -bootstrap -advertise ROUTABLE_IP
-  image: progrium/consul:latest
+  command: -server -bootstrap -advertise ROUTABLE_IP 
+  build: consul/
+  links:
+  - pushgateway 
   ports:
   - "8300:8300"
   - "8400:8400"
   - "8500:8500"
   - "8600:53/udp"
   volumes:
-   - "/var/run/docker.sock:/var/run/docker.sock"
+  - "/var/run/docker.sock:/var/run/docker.sock"
+  - "consul/config:/etc/consul"
+  - "consul/handlers:/handlers"
 
 registrator:
   command: consul://consul:8500
@@ -23,3 +27,17 @@ registrator:
   - consul
   volumes:
   - "/var/run/docker.sock:/tmp/docker.sock"
+
+prometheus:
+  build: prometheus/
+  links:
+  - pushgateway 
+  ports:
+  - "9090:9090"
+  volumes:
+  - "prometheus/config:/config"
+
+pushgateway:
+  image: prom/pushgateway:latest
+  ports:
+  - "9091:9091"

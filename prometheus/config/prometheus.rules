@@ -1,0 +1,7 @@
+ALERT InstanceDown
+  IF service_state == 0
+  WITH {
+    criticity="severe"
+  }
+  SUMMARY "Instance {{$labels.instance}} down"
+  DESCRIPTION "{{$labels.instance}} of job {{$labels.job}} is down!"
