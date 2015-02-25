@@ -56,7 +56,11 @@ $ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d s
 
 Point your browser at http://localhost to see the result.
 
-### Consul UI
+### Consul
 
-Access the Consul UI via http://localhost:8500
+You can place different configuration files in consul/config, they will be loaded by Consul.
+
+You can place your watch handlers inside consul/handlers, it will be map on the container in */handlers*.
+
+You can access the Consul UI via http://localhost:8500
 
