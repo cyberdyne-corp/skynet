@@ -6,8 +6,8 @@ loadbalancer:
   - "80:80"
 
 consul:
-  command: -server -bootstrap -advertise ROUTABLE_IP
-  image: progrium/consul:latest
+  command: -server -bootstrap -config-dir /etc/consul -advertise ROUTABLE_IP 
+  build: consul/
   ports:
   - "8300:8300"
   - "8400:8400"
@@ -15,6 +15,8 @@ consul:
   - "8600:53/udp"
   volumes:
    - "/var/run/docker.sock:/var/run/docker.sock"
+   - "consul/config:/etc/consul"
+   - "consul/handlers:/handlers"
 
 registrator:
   command: consul://consul:8500
