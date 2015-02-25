@@ -51,7 +51,7 @@ $ fig up -d
 You'll need to have a containerized webapp available.
 
 ````
-$ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d sitea
+$ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d tutum/hello-world
 ````
 
 Point your browser at http://localhost to see the result.
