@@ -32,7 +32,8 @@ registrator:
 prometheus:
   build: prometheus/
   links:
-  - pushgateway 
+  - pushgateway
+  - haproxyexporter
   ports:
   - "9090:9090"
   volumes:
@@ -42,3 +43,9 @@ pushgateway:
   image: prom/pushgateway:latest
   ports:
   - "9091:9091"
+
+haproxyexporter:
+  command: -haproxy.scrape-uri=http://loadbalancer:1936/;csv
+  image: prom/haproxy-exporter:latest
+  links:
+  - loadbalancer
