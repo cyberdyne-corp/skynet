@@ -1,0 +1,20 @@
+global
+    maxconn 4096
+    daemon
+
+defaults
+	mode http
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+listen  stats :1936
+    mode http
+    stats enable
+    stats hide-version
+    stats realm Haproxy\ Statistics
+    stats uri /
+ 
+listen http-front :80
+    balance         roundrobin{{range service "my_tag.my_service"}}
+    server {{.Node}}-{{.Port}} {{.Address}}:{{.Port}}{{end}}

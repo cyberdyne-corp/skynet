@@ -4,6 +4,7 @@ loadbalancer:
   - consul
   ports:
   - "80:80"
+  - "1936:1936"
 
 consul:
   command: -server -bootstrap -advertise ROUTABLE_IP 

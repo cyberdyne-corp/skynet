@@ -1,6 +1,6 @@
-# docker-CRPN
+# docker-CRPH
 
-A stack used to automatically register Docker container hosting webapps as services in Consul, distribute them using Nginx and monitor it with Prometheus.
+A stack used to automatically register Docker container hosting webapps as services in Consul, distribute them using HAProxy and monitor it with Prometheus.
 
 # About
 
@@ -9,8 +9,8 @@ Powered by the following tools:
 * Fig: a tool used to manage an application in distributed containers.
 > See: http://www.fig.sh/
 
-* Nginx: an HTTP and reverse proxy server.
-> See: http://nginx.org/
+* HAProxy: a TCP/HTTP load balancer.
+> See: http://www.haproxy.org/
 
 * Consul: a tool for discovering and configuring services in your infrastructure.
 > See: https://www.consul.io/
@@ -42,7 +42,7 @@ Update the *fig.yml* file and replace *ROUTABLE_IP* with a routable IP address (
 
 ### Start it
 
-Start the Nginx + Consul + Registrator stack:
+Start the stack:
 
 ````
 $ fig pull & fig build
