@@ -6,8 +6,11 @@ A stack used to automatically register Docker container hosting webapps as servi
 
 Powered by the following tools:
 
-* Fig: a tool used to manage an application in distributed containers.
-> See: http://www.fig.sh/
+* Docker: a portable, lightweight runtime and packaging tool.
+> See: https://www.docker.com/
+
+* Docker-compose: a tool used to manage an application in distributed containers.
+> See: https://docs.docker.com/compose/
 
 * HAProxy: a TCP/HTTP load balancer.
 > See: http://www.haproxy.org/
@@ -28,15 +31,12 @@ Powered by the following tools:
 
 ## Pre-requisites
 
-Ensure you have Docker installed.
+Ensure you have Docker and Docker Compose installed:
 
-Install fig:
+* Docker installation: http://docs.docker.com/installation/
+* Docker Compose installation: https://docs.docker.com/compose/#installation-and-set-up 
 
-````
-$ sudo pip install -U fig
-````
-
-Update the *fig.yml* file and replace *ROUTABLE_IP* with a routable IP address (use your main interface IP address).
+Then, update the *docker-compose.yml* file and replace *ROUTABLE_IP* with a routable IP address (use your main interface IP address).
 
 ## Let's play
 
@@ -45,8 +45,8 @@ Update the *fig.yml* file and replace *ROUTABLE_IP* with a routable IP address (
 Start the stack:
 
 ````
-$ fig pull & fig build
-$ fig up -d
+$ docker-compose pull & docker-compose build
+$ docker-compose up -d
 ````
 
 ### Start a webapp
@@ -63,7 +63,7 @@ Point your browser at http://localhost to see the result.
 
 You can place different configuration files in consul/config, they will be loaded by Consul.
 
-You can place your watch handlers inside consul/handlers, it will be map on the container in */handlers*.
+You can place your watch handlers inside consul/handlers, it will be mapped on the container in */handlers*.
 
 You can access the Consul UI via http://localhost:8500
 
