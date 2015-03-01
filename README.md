@@ -1,6 +1,6 @@
-# docker-CRN
+# docker-CRPN
 
-A stack used to automatically register Docker container hosting webapps as services in Consul and distribute them using Nginx.
+A stack used to automatically register Docker container hosting webapps as services in Consul, distribute them using Nginx and monitor it with Prometheus.
 
 # About
 
@@ -20,6 +20,9 @@ Powered by the following tools:
 
 * Registrator: a tool that automatically register/deregister Docker containers into Consul.
 > See: https://github.com/gliderlabs/registrator
+
+* Prometheus: An open-source service monitoring system and time series database.
+> See: http://prometheus.io/
 
 # How to
 
@@ -64,3 +67,8 @@ You can place your watch handlers inside consul/handlers, it will be map on the 
 
 You can access the Consul UI via http://localhost:8500
 
+### Prometheus
+
+Access the Prometheus UI via http://localhost:9090
+
+Access the Prometheus Gateway UI via http://localhost:9091
