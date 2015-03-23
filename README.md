@@ -53,11 +53,15 @@ $ docker-compose up -d
 
 You'll need to have a containerized webapp available.
 
-A default one:
+#### Default
+
+You can use a default webapp for the basics:
 
 ````
 $ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d tutum/hello-world
 ````
+
+#### Advanced
 
 If you want to use the embedded webapp with consul health check, you'll need to build it first:
 
