@@ -1,4 +1,4 @@
-# docker-CRPH
+# docker-skynet
 
 A stack used to automatically register Docker container hosting webapps as services in Consul, distribute them using HAProxy and monitor it with Prometheus.
 
