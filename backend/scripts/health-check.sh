@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Stalling for the management port to be ready.
+while true; do
+    nc -q 1 localhost 8081 > /dev/null && break
+done
+
 RET=$(/usr/bin/http -b http://localhost:8081/health | /usr/bin/jq -e 'contains({status: "UP"})')
 CODE=$?
 
