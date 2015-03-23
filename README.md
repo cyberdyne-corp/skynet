@@ -53,9 +53,30 @@ $ docker-compose up -d
 
 You'll need to have a containerized webapp available.
 
+A default one:
+
 ````
 $ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d tutum/hello-world
 ````
+
+If you want to use the embedded webapp with consul health check, you'll need to build it first:
+
+```
+$ docker build -t backend backend/
+```
+
+Then run it:
+
+```
+$ docker run -d -P \
+    -e "SERVICE_NAME=my_service" \
+    -e "SERVICE_TAGS=my_tag" \
+    -e "SERVICE_8081_IGNORE=1" \
+    -e "SERVICE_8080_CHECK_CMD=/tmp/health-check.sh" \
+    -e "SERVICE_8080_CHECK_INTERVAL=15s" \
+    backend \
+    java -jar /tmp/backend.jar
+```
 
 Point your browser at http://localhost to see the result.
 
