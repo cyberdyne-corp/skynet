@@ -1,9 +1,0 @@
-{
-	"watches": [
-	{
-		"type": "checks",
-		"service": "my_service",
-		"handler": "/handlers/health-check-handler.sh"
-	}
-	]
-}

@@ -16,5 +16,5 @@ listen  stats :1936
     stats uri /
  
 listen http-front :80
-    balance         roundrobin{{range service "my_tag.my_service"}}
+    balance         roundrobin{{range service "myService"}}
     server {{.Node}}-{{.Port}} {{.Address}}:{{.Port}}{{end}}

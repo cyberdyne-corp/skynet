@@ -1,6 +1,12 @@
 # docker-skynet
 
-A stack used to automatically register Docker container hosting webapps as services in Consul, distribute them using HAProxy and monitor it with Prometheus.
+A management stack for web applications.
+
+# POC: Blue-Green deployment
+
+This is a Proof-Of-Concept for a web application deployment using the Blue-Green approach.
+
+> What is Blue-Green deployment: http://martinfowler.com/bliki/BlueGreenDeployment.html
 
 # About
 
@@ -24,9 +30,6 @@ Powered by the following tools:
 * Registrator: a tool that automatically register/deregister Docker containers into Consul.
 > See: https://github.com/gliderlabs/registrator
 
-* Prometheus: An open-source service monitoring system and time series database.
-> See: http://prometheus.io/
-
 # How to
 
 ## Pre-requisites
@@ -40,60 +43,56 @@ Then, update the *docker-compose.yml* file and replace *ROUTABLE_IP* with a rout
 
 ## Let's play
 
-### Start it
+### Build and start the stack
 
-Start the stack:
+Build it:
 
 ````
-$ docker-compose pull & docker-compose build
+$ docker-compose pull && docker-compose build
+````
+
+Start it:
+
+````
 $ docker-compose up -d
 ````
 
-### Start a webapp
+### Do some blue-green magic
 
-You'll need to have a containerized webapp available.
-
-#### Default
-
-You can use a default webapp for the basics:
+Start a "version A" application:
 
 ````
-$ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d tutum/hello-world
+$ docker run -d \
+-e "SERVICE_NAME=myService" \
+-p 80 \
+-v ${PWD}/backend/version-a:/var/www \
+eboraas/apache
 ````
 
-#### Advanced
+You should be able to see the result in your browser at: http://localhost
 
-If you want to use the embedded webapp with consul health check, you'll need to build it first:
+Next, start a "version B" application:
 
-```
-$ docker build -t backend backend/
-```
+````
+$ docker run -d \
+-e "SERVICE_NAME=myService" \
+-p 80 \
+-v ${PWD}/backend/version-a:/var/www \
+eboraas/apache
+````
 
-Then run it:
+Point your browser at http://localhost to see the result, you should now be load balanced between the 2 versions of the application.
 
-```
-$ docker run -d -P \
-    -e "SERVICE_NAME=my_service" \
-    -e "SERVICE_TAGS=my_tag" \
-    -e "SERVICE_8081_IGNORE=1" \
-    -e "SERVICE_8080_CHECK_CMD=/tmp/health-check.sh" \
-    -e "SERVICE_8080_CHECK_INTERVAL=15s" \
-    backend \
-    java -jar /tmp/backend.jar
-```
+Now all you need to do is to stop your "version A" container, no more, and enjoy a blue-green deployment !
 
-Point your browser at http://localhost to see the result.
+## Extras
 
 ### Consul
 
 You can place different configuration files in consul/config, they will be loaded by Consul.
 
-You can place your watch handlers inside consul/handlers, it will be mapped on the container in */handlers*.
-
 You can access the Consul UI via http://localhost:8500
 
-### Prometheus
+### HAProxy
 
-Access the Prometheus UI via http://localhost:9090
-
-Access the Prometheus Gateway UI via http://localhost:9091
+You can access the HAProxy stats webpage at: http://localhost:1936
