@@ -18,8 +18,8 @@ Powered by the following tools:
 * Docker-compose: a tool used to manage an application in distributed containers.
 > See: https://docs.docker.com/compose/
 
-* HAProxy: a TCP/HTTP load balancer.
-> See: http://www.haproxy.org/
+* Nginx: an HTTP and reverse proxy server.
+> See: http://nginx.org/
 
 * Consul: a tool for discovering and configuring services in your infrastructure.
 > See: https://www.consul.io/
@@ -92,7 +92,3 @@ Now all you need to do is to stop your "version A" container, no more, and enjoy
 You can place different configuration files in consul/config, they will be loaded by Consul.
 
 You can access the Consul UI via http://localhost:8500
-
-### HAProxy
-
-You can access the HAProxy stats webpage at: http://localhost:1936
