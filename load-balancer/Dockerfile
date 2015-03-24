@@ -8,7 +8,7 @@ ENV CT_URL https://github.com/hashicorp/consul-template/releases/download/v0.7.0
 RUN curl -L $CT_URL | tar -C /usr/local/bin --strip-components 1 -zxf -
 
 RUN rm -v /etc/nginx/conf.d/*
-COPY nginx.ctmpl /etc/consul-templates/nginx.ctmpl
-COPY supervisord.conf /etc/supervisor/conf.d/nginx.conf
+COPY config/nginx.ctmpl /etc/consul-templates/nginx.ctmpl
+COPY config/supervisord.conf /etc/supervisor/conf.d/nginx.conf
 
 ENTRYPOINT ["/usr/bin/supervisord"]
