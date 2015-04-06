@@ -77,7 +77,6 @@ Next, start a "version B" container:
 
 ````
 $ docker run -d \
--e "SERVICE_NAME=myService" \
 -p 80 \
 -v ${PWD}/backend/version-b:/var/www \
 eboraas/apache
