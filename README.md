@@ -30,6 +30,8 @@ Powered by the following tools:
 * Registrator: a tool that automatically register/deregister Docker containers into Consul.
 > See: https://github.com/gliderlabs/registrator
 
+![poc_hld][hld]
+
 # How to
 
 ## Pre-requisites
@@ -92,3 +94,5 @@ Now all you need to do is to stop your "version A" container, no more, and enjoy
 You can place different configuration files in consul/config, they will be loaded by Consul.
 
 You can access the Consul UI via http://localhost:8500
+
+[hld]: https://www.lucidchart.com/publicSegments/view/5522790b-efb4-46eb-a384-590a0a00ce7d/image.png "HLD"
