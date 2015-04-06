@@ -17,11 +17,3 @@ consul:
   volumes:
   - "/var/run/docker.sock:/var/run/docker.sock"
   - "consul/config:/etc/consul"
-
-registrator:
-  command: consul://consul:8500
-  image: progrium/registrator:latest
-  links:
-  - consul
-  volumes:
-  - "/var/run/docker.sock:/tmp/docker.sock"
