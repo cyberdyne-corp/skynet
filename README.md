@@ -27,9 +27,6 @@ Powered by the following tools:
 * Consul-template: a daemon used to populate values from Consul on your filesystem.
 > See: https://github.com/hashicorp/consul-template
 
-* Registrator: a tool that automatically register/deregister Docker containers into Consul.
-> See: https://github.com/gliderlabs/registrator
-
 # How to
 
 ## Pre-requisites
@@ -59,19 +56,24 @@ $ docker-compose up -d
 
 ### Do some blue-green magic
 
-Start a "version A" application:
+Start a "version A" container:
 
 ````
 $ docker run -d \
--e "SERVICE_NAME=myService" \
 -p 80 \
 -v ${PWD}/backend/version-a:/var/www \
 eboraas/apache
 ````
 
+Retrieve the container name using ```docker ps``` and register it in Consul:
+
+````
+$ ./register-service-in-consul.sh `docker inspect -f '"{{ .Config.Hostname }}:{{ .Name }}{{ range $key, $value := .NetworkSettings.Ports }}:{{ $key }}" {{ (index $value 0).HostPort }}{{ end }}' CONTAINER_A_NAME`
+````
+
 You should be able to see the result in your browser at: http://localhost
 
-Next, start a "version B" application:
+Next, start a "version B" container:
 
 ````
 $ docker run -d \
@@ -81,9 +83,23 @@ $ docker run -d \
 eboraas/apache
 ````
 
+And register it in Consul:
+
+````
+$ ./register-service-in-consul.sh `docker inspect -f '"{{ .Config.Hostname }}:{{ .Name }}{{ range $key, $value := .NetworkSettings.Ports }}:{{ $key }}" {{ (index $value 0).HostPort }}{{ end }}' CONTAINER_B_NAME`
+````
+
 Point your browser at http://localhost to see the result, you should now be load balanced between the 2 versions of the application.
 
-Now all you need to do is to stop your "version A" container, no more, and enjoy a blue-green deployment !
+Now all you need to do is to deregister your "version A" container from Consul:
+
+````
+$ ./deregister-service-in-consul.sh `docker inspect -f '{{ .Config.Hostname }}:{{ .Name }}{{ range $key, $value := .NetworkSettings.Ports }}:{{ $key }}{{ end }}' CONTAINER_A_NAME`
+````
+
+And that's it, enjoy some blue green deployment ! 
+
+Optionally, you can kill the "version A" container ;)
 
 ## Extras
 
