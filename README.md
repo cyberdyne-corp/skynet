@@ -100,6 +100,25 @@ And that's it, enjoy some blue green deployment !
 
 Optionally, you can kill the "version A" container ;)
 
+### Register/deregister scripts
+
+#### register-service-in-consul.sh
+
+The script requires 2 parameters:
+
+* SERVICE_ID: the ID of the service to register
+* SERVICE_PORT: the port used to access the service
+
+It calls the Consul HTTP API to register a service using the */v1/agent/service/register* endpoint.
+
+#### deregister-service-in-consul.sh
+
+The script requires 1 parameter:
+
+* SERVICE_ID: the ID of the service to deregister
+
+It calls the Consul HTTP API to deregister a service using the */v1/agent/service/deregister/SERVICE_ID* endpoint.
+
 ## Extras
 
 ### Consul
