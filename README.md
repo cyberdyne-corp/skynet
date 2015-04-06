@@ -27,6 +27,8 @@ Powered by the following tools:
 * Consul-template: a daemon used to populate values from Consul on your filesystem.
 > See: https://github.com/hashicorp/consul-template
 
+![poc_hld][hld]
+
 # How to
 
 ## Pre-requisites
@@ -130,3 +132,5 @@ You can access the Consul UI via http://localhost:8500
 ### HAProxy
 
 You can access the HAProxy stats webpage at: http://localhost:1936
+
+[hld]: https://www.lucidchart.com/publicSegments/view/552279ed-28f0-4932-8c74-6a1b0a0059fd/image.png "HLD"
