@@ -30,6 +30,8 @@ Powered by the following tools:
 * Registrator: a tool that automatically register/deregister Docker containers into Consul.
 > See: https://github.com/gliderlabs/registrator
 
+![poc_hld][hld]
+
 # How to
 
 ## Pre-requisites
@@ -96,3 +98,5 @@ You can access the Consul UI via http://localhost:8500
 ### HAProxy
 
 You can access the HAProxy stats webpage at: http://localhost:1936
+
+[hld]: https://www.lucidchart.com/publicSegments/view/55227704-bafc-4f90-8e96-39fc0a00ce7d/image.png "HLD"
