@@ -14,13 +14,13 @@ kill_container() {
 
 spawn_container() {
 	$(docker run -d -P \
-		-e "SERVICE_NAME=my_service" \
-		-e "SERVICE_TAGS=my_tag" \
+		-e "SERVICE_NAME=myService" \
+		-e "SERVICE_TAGS=myTag" \
 		-e "SERVICE_8081_IGNORE=1" \
 		-e "SERVICE_8080_CHECK_CMD=/tmp/health-check.sh" \
 		-e "SERVICE_8080_CHECK_INTERVAL=15s" \
-		helloworld \
-		java -jar /tmp/demo.jar)
+		backend \
+		java -jar /tmp/backend.jar)
 }
 
 # Push a metric to the Prometheus push gateway.

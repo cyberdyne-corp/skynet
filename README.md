@@ -58,7 +58,7 @@ You'll need to have a containerized webapp available.
 You can use a default webapp for the basics:
 
 ````
-$ docker run -d -e "SERVICE_NAME=my_service" -e "SERVICE_TAGS=my_tag" -p 80 -d tutum/hello-world
+$ docker run -d -e "SERVICE_NAME=myService" -e "SERVICE_TAGS=myTag" -p 80 -d tutum/hello-world
 ````
 
 #### Advanced
@@ -73,8 +73,8 @@ Then run it:
 
 ```
 $ docker run -d -P \
-    -e "SERVICE_NAME=my_service" \
-    -e "SERVICE_TAGS=my_tag" \
+    -e "SERVICE_NAME=myService" \
+    -e "SERVICE_TAGS=myTag" \
     -e "SERVICE_8081_IGNORE=1" \
     -e "SERVICE_8080_CHECK_CMD=/tmp/health-check.sh" \
     -e "SERVICE_8080_CHECK_INTERVAL=15s" \
