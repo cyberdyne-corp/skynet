@@ -27,6 +27,8 @@ Powered by the following tools:
 * Prometheus: An open-source service monitoring system and time series database.
 > See: http://prometheus.io/
 
+![poc_hld][hld]
+
 # How to
 
 ## Pre-requisites
@@ -97,3 +99,5 @@ You can access the Consul UI via http://localhost:8500
 Access the Prometheus UI via http://localhost:9090
 
 Access the Prometheus Gateway UI via http://localhost:9091
+
+[hld]: https://www.lucidchart.com/publicSegments/view/5528f851-5dac-4838-a51c-37dc0a0059fc/image.png "HLD"
