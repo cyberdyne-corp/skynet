@@ -1,5 +1,6 @@
 ALERT ServiceDown
-  IF consul_catalog_service_node_healthy == 0
+  IF consul_catalog_service_node_healthy{service="myService"} == 0
+  FOR 30s
   WITH {
     criticity="severe"
   }
