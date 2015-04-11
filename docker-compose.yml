@@ -8,7 +8,7 @@ loadbalancer:
 
 consul:
   command: -server -bootstrap -advertise ROUTABLE_IP 
-  build: consul/
+  image: progrium/consul:latest
   links:
   - pushgateway 
   ports:
@@ -19,7 +19,6 @@ consul:
   volumes:
   - "/var/run/docker.sock:/var/run/docker.sock"
   - "consul/config:/etc/consul"
-  - "consul/handlers:/handlers"
 
 registrator:
   command: consul://consul:8500
@@ -30,10 +29,12 @@ registrator:
   - "/var/run/docker.sock:/tmp/docker.sock"
 
 prometheus:
-  build: prometheus/
+  image: prom/prometheus:latest
+  command: -config.file=/config/prometheus.conf
   links:
   - pushgateway
   - haproxyexporter
+  - consulexporter
   ports:
   - "9090:9090"
   volumes:
@@ -49,3 +50,9 @@ haproxyexporter:
   image: prom/haproxy-exporter:latest
   links:
   - loadbalancer
+
+consulexporter:
+  command: -consul.server=consul:8500 -web.listen-address=:9101
+  image: prom/consul-exporter:latest
+  links:
+  - consul
