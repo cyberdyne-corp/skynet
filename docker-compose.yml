@@ -7,7 +7,7 @@ loadbalancer:
   - "1936:1936"
 
 consul:
-  command: -server -bootstrap -advertise ROUTABLE_IP 
+  command: -server -bootstrap -advertise ROUTABLE_IP
   image: progrium/consul:latest
   links:
   - pushgateway 
@@ -56,3 +56,24 @@ consulexporter:
   image: prom/consul-exporter:latest
   links:
   - consul
+
+promdash:
+  build: promdash/ 
+  ports:
+  - "3000:3000"
+  links:
+  - promdashdb
+  - prometheus
+  environment:
+    DATABASE_URL: mysql2://promdash:promdash@promdashdb/promdash
+    RAILS_ENV: production
+
+promdashdb:
+  image: mysql:5.7
+  ports:
+  - "3306:3306"
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    MYSQL_USER: promdash
+    MYSQL_PASSWORD: promdash
+    MYSQL_DATABASE: promdash
