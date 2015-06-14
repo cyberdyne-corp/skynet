@@ -1,8 +1,5 @@
 FROM prom/promdash:latest
 
-RUN apt-get update && apt-get install netcat-openbsd 
+ENV DATABASE_URL sqlite3:/tmp/promdash.sqlite3
 
-COPY startup.sh /tmp/startup.sh
-RUN chmod +x /tmp/startup.sh
-
-CMD ["/tmp/startup.sh"]
+RUN bin/env bin/bundle exec rake db:migrate

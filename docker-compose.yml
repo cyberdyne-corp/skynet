@@ -62,18 +62,6 @@ promdash:
   ports:
   - "3000:3000"
   links:
-  - promdashdb
   - prometheus
   environment:
-    DATABASE_URL: mysql2://promdash:promdash@promdashdb/promdash
-    RAILS_ENV: production
-
-promdashdb:
-  image: mysql:5.7
-  ports:
-  - "3306:3306"
-  environment:
-    MYSQL_ALLOW_EMPTY_PASSWORD: yes
-    MYSQL_USER: promdash
-    MYSQL_PASSWORD: promdash
-    MYSQL_DATABASE: promdash
+    DATABASE_URL: sqlite3:/tmp/promdash.sqlite3
