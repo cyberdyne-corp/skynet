@@ -1,8 +1,6 @@
-FROM dockerfile/java:oracle-java7
+FROM java:7
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
-
-RUN apt-get update && apt-get install -y httpie jq/trusty-backports
+RUN apt-get update && apt-get install -y httpie jq
 
 COPY scripts/health-check.sh /tmp/health-check.sh
 RUN chmod +x /tmp/health-check.sh

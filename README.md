@@ -100,4 +100,6 @@ Access the Prometheus UI via http://localhost:9090
 
 Access the Prometheus Gateway UI via http://localhost:9091
 
+Access the Promdash UI via http://localhost:3000
+
 [hld]: https://www.lucidchart.com/publicSegments/view/552915db-7dc4-490d-861c-2e260a00ce7d/image.png "HLD"
