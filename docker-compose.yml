@@ -30,7 +30,7 @@ registrator:
 
 prometheus:
   image: prom/prometheus:latest
-  command: -config.file=/config/prometheus.conf
+  command: -config.file=/config/prometheus.yml
   links:
   - pushgateway
   - haproxyexporter
