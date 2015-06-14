@@ -9,8 +9,6 @@ loadbalancer:
 consul:
   command: -server -bootstrap -advertise ROUTABLE_IP
   image: progrium/consul:latest
-  links:
-  - pushgateway 
   ports:
   - "8300:8300"
   - "8400:8400"
@@ -32,18 +30,12 @@ prometheus:
   image: prom/prometheus:latest
   command: -config.file=/config/prometheus.yml
   links:
-  - pushgateway
   - haproxyexporter
   - consulexporter
   ports:
   - "9090:9090"
   volumes:
   - "prometheus/config:/config"
-
-pushgateway:
-  image: prom/pushgateway:latest
-  ports:
-  - "9091:9091"
 
 haproxyexporter:
   command: -haproxy.scrape-uri=http://loadbalancer:1936/;csv

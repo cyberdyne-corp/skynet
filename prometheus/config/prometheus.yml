@@ -9,4 +9,4 @@ scrape_configs:
 - job_name: prometheus
 
   target_groups:
-  - targets: ['pushgateway:9091', 'consulexporter:9101', 'haproxyexporter:9101']
+  - targets: ['consulexporter:9101', 'haproxyexporter:9101']
