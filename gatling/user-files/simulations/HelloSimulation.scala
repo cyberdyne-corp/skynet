@@ -6,21 +6,29 @@ import scala.concurrent.duration._
 
 class HelloSimulation extends Simulation {
 
-  val httpConf = http
-    .baseURL("http://IP-NOT-SET-IN-SIMULATION-FILE") // FIXME routable IP
-    .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-    .doNotTrackHeader("1")
-    .acceptLanguageHeader("en-US,en;q=0.5")
+val httpProtocol = http
+    //.baseURL("http://192.168.2.75")
+    .baseURL("http://INSERT-ROUTABLE-IP")
+    .acceptHeader("application/json, text/plain, */*")
     .acceptEncodingHeader("gzip, deflate")
-    .userAgentHeader("Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0")
+    .acceptLanguageHeader("en-US,en;q=0.5")
+    .connection("keep-alive")
+    .contentTypeHeader("application/json; charset=UTF-8")
+    .userAgentHeader("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:35.0) Gecko/20100101 Firefox/35.0")
 
   val scn = scenario("HelloSimulation")
     .exec(http("request_1")
     .get("/"))
     //.pause(5)
 
-  setUp(
-    scn.inject(atOnceUsers(10000))
-  ).protocols(httpConf)
+
+	setUp(
+	  scn.inject(
+		rampUsersPerSec(10) to 300 during(2 minutes)
+	  )
+	).protocols(httpProtocol)
+
+
+
 }
 
