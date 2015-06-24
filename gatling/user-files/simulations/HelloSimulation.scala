@@ -20,7 +20,6 @@ val httpProtocol = http
     .get("/sleep?max=10"))
     //.pause(5)
 
-
   setUp(
     scn.inject(
       nothingFor(4 seconds), // 1
@@ -35,7 +34,4 @@ val httpProtocol = http
       heavisideUsers(10) over (10 seconds) // 10
     )
   ).protocols(httpProtocol)
-
-
-
 }
