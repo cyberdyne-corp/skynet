@@ -7,7 +7,6 @@ import scala.concurrent.duration._
 class HelloSimulation extends Simulation {
 
 val httpProtocol = http
-    
     .baseURL("http://INSERT-ROUTABLE-IP")
     .acceptHeader("application/json, text/plain, */*")
     .acceptEncodingHeader("gzip, deflate")
