@@ -50,7 +50,7 @@ consulexporter:
   - consul
 
 promdash:
-  build: promdash/ 
+  build: promdash/
   ports:
   - "3000:3000"
   links:

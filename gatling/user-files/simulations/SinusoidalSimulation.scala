@@ -7,7 +7,7 @@ import scala.concurrent.duration._
 class SinusoidalSimulation extends Simulation {
 
 val httpProtocol = http
-    .baseURL("http://INSERT-ROUTABLE-IP")
+    .baseURL("http://ROUTABLE-IP")
     .acceptHeader("application/json, text/plain, */*")
     .acceptEncodingHeader("gzip, deflate")
     .acceptLanguageHeader("en-US,en;q=0.5")
@@ -15,27 +15,22 @@ val httpProtocol = http
     .userAgentHeader("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:35.0) Gecko/20100101 Firefox/35.0")
 
   val scn = scenario("SinusoidalScenario")
-    .exec(http("sleep_static_5sec")
-    .get("/sleep?duration=5"))
+    .exec(http("sleep_static_3sec")
+    .get("/sleep?duration=3"))
 
   setUp(
     scn.inject(
-      rampUsers(100) over (15 seconds),
-      rampUsers(25) over (30 seconds),
-      rampUsers(100) over (15 seconds),
-      rampUsers(25) over (15 seconds),
-      rampUsers(100) over (15 seconds),
-      rampUsers(25) over (30 seconds),
-      rampUsers(100) over (15 seconds),
-      rampUsers(25) over (15 seconds),
-      rampUsers(100) over (15 seconds),
-      rampUsers(25) over (30 seconds),
-      rampUsers(100) over (15 seconds),
-      rampUsers(25) over (15 seconds),
-      rampUsers(100) over (15 seconds),
-      rampUsers(25) over (30 seconds),
-      rampUsers(100) over (15 seconds),
-      rampUsers(25) over (15 seconds)
+      constantUsersPerSec(100) during(30 seconds),
+      constantUsersPerSec(25) during(30 seconds),
+      constantUsersPerSec(100) during(30 seconds),
+      constantUsersPerSec(25) during(30 seconds),
+      constantUsersPerSec(100) during(30 seconds),
+      constantUsersPerSec(25) during(30 seconds),
+      constantUsersPerSec(100) during(30 seconds),
+      constantUsersPerSec(25) during(30 seconds),
+      constantUsersPerSec(100) during(30 seconds),
+      constantUsersPerSec(25) during(30 seconds)
     )
-  ).protocols(httpProtocol)
+  )
+  .protocols(httpProtocol)
 }
