@@ -48,12 +48,3 @@ consulexporter:
   image: prom/consul-exporter:latest
   links:
   - consul
-
-promdash:
-  build: promdash/
-  ports:
-  - "3000:3000"
-  links:
-  - prometheus
-  environment:
-    DATABASE_URL: sqlite3:/tmp/promdash.sqlite3
