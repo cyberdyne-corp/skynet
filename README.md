@@ -36,7 +36,7 @@ Powered by the following tools:
 Ensure you have Docker and Docker Compose installed:
 
 * Docker installation: http://docs.docker.com/installation/
-* Docker Compose installation: https://docs.docker.com/compose/#installation-and-set-up 
+* Docker Compose installation: https://docs.docker.com/compose/#installation-and-set-up
 
 Then, update the *docker-compose.yml* file and replace *ROUTABLE_IP* with a routable IP address (use your main interface IP address).
 
@@ -97,8 +97,6 @@ You can access the Consul UI via http://localhost:8500
 ### Prometheus
 
 Access the Prometheus UI via http://localhost:9090
-
-Access the Prometheus Gateway UI via http://localhost:9091
 
 Access the Promdash UI via http://localhost:3000
 
