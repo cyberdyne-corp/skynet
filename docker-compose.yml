@@ -41,12 +41,3 @@ haproxyexporter:
   image: prom/haproxy-exporter:latest
   links:
   - loadbalancer
-
-promdash:
-  build: promdash/
-  ports:
-  - "3000:3000"
-  links:
-  - prometheus
-  environment:
-    DATABASE_URL: sqlite3:/tmp/promdash.sqlite3
