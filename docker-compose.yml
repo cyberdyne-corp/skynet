@@ -20,7 +20,7 @@ consul:
 
 registrator:
   command: consul://consul:8500
-  image: gliderlabs/registrator:v6
+  image: gliderlabs/registrator:v5
   links:
   - consul
   volumes:
