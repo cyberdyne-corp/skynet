@@ -14,7 +14,7 @@ listen  stats :1936
     stats hide-version
     stats realm Haproxy\ Statistics
     stats uri /
- 
+
 listen http-front :80
-    balance         roundrobin{{range service "myTag.myService"}}
+    balance         roundrobin{{range service "skynet_backend"}}
     server {{.Node}}-{{.Port}} {{.Address}}:{{.Port}}{{end}}

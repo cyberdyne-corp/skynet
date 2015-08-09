@@ -55,32 +55,21 @@ $ docker-compose up -d
 
 You'll need to have a containerized webapp available.
 
-#### Default
-
-You can use a default webapp for the basics:
-
-````
-$ docker run -d -e "SERVICE_NAME=myService" -e "SERVICE_TAGS=myTag" -p 80 -d tutum/hello-world
-````
-
-#### Advanced
-
-If you want to use the embedded webapp with consul health check, you'll need to build it first:
+A backend webapp is shipped with the stack, you'll need to build it first:
 
 ```
-$ docker build -t backend backend/
+$ docker build -t skynet-backend backend/
 ```
 
 Then run it:
 
 ```
 $ docker run -d -P \
-    -e "SERVICE_NAME=myService" \
-    -e "SERVICE_TAGS=myTag" \
+    -e "SERVICE_NAME=skynet_backend" \
     -e "SERVICE_8081_IGNORE=1" \
     -e "SERVICE_8080_CHECK_CMD=/tmp/health-check.sh" \
     -e "SERVICE_8080_CHECK_INTERVAL=15s" \
-    backend \
+    skynet-backend \
     java -jar /tmp/backend.jar
 ```
 
