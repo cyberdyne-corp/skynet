@@ -16,7 +16,7 @@ consul:
   - "8600:53/udp"
   volumes:
   - "/var/run/docker.sock:/var/run/docker.sock"
-  - "consul/config:/etc/consul"
+  - "./consul/config:/etc/consul"
 
 registrator:
   command: consul://consul:8500
@@ -34,7 +34,7 @@ prometheus:
   ports:
   - "9090:9090"
   volumes:
-  - "prometheus/config:/config"
+  - "./prometheus/config:/config"
 
 haproxyexporter:
   command: -haproxy.scrape-uri=http://loadbalancer:1936/;csv
