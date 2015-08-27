@@ -41,3 +41,21 @@ haproxyexporter:
   image: prom/haproxy-exporter:latest
   links:
   - loadbalancer
+
+genisys:
+  image: cyberdynesystems/genisys:latest
+  links:
+  - consul
+  ports:
+  - "7001:7001"
+  volumes:
+  - "./genisys/config/genisys.yml:/app/genisys.yml"
+
+genisys-connector-docker:
+  image: cyberdynesystems/genisys-connector-docker:latest
+  links:
+  - genisys
+  ports:
+  - "7051:7051"
+  volumes:
+  - "/var/run/docker.sock:/var/run/docker.sock"
