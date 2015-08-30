@@ -1,8 +1,0 @@
-ALERT ServiceDown
-  IF consul_catalog_service_node_healthy{service="skynet_backend"} == 0
-  FOR 30s
-  WITH {
-    criticity="severe"
-  }
-  SUMMARY "Instance {{$labels.instance}} down"
-  DESCRIPTION "{{$labels.instance}} of job {{$labels.job}} is down!"
