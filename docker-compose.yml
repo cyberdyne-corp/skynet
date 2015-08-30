@@ -46,6 +46,7 @@ genisys:
   image: cyberdynesystems/genisys:latest
   links:
   - consul
+  - genisys-connector-docker
   ports:
   - "7001:7001"
   volumes:
@@ -53,9 +54,8 @@ genisys:
 
 genisys-connector-docker:
   image: cyberdynesystems/genisys-connector-docker:latest
-  links:
-  - genisys
   ports:
   - "7051:7051"
   volumes:
   - "/var/run/docker.sock:/var/run/docker.sock"
+  - "./genisys-connector/config/genisys-connector.yml:/app/genisys-connector.yml"

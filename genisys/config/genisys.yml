@@ -1,4 +1,7 @@
 genisys:
+    # Server address to bind to.
+  bind: 0.0.0.0
+
   # Application port
   port: 7001
 
@@ -7,7 +10,10 @@ genisys:
 
 consul:
   # Consul host
-  host: http://consul:8500
+  host: consul
+
+  # Consul port
+  port: 8500
 
   # Prefix of services managed by genisys
   service_prefix: 'skynet_'
