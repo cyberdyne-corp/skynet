@@ -6,5 +6,12 @@
 		"dns": 53
 	},
 	"recursor": "8.8.8.8",
-	"disable_update_check": true
+	"disable_update_check": true,
+	"watches": [
+		{
+			"type": "keyprefix",
+			"prefix": "skynet/resources/",
+			"handler": "/handlers/keyprefix-handler.sh"
+		}
+	]
 }

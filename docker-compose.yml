@@ -7,8 +7,8 @@ loadbalancer:
   - "1936:1936"
 
 consul:
-  command: -server -bootstrap -advertise ROUTABLE_IP
-  image: progrium/consul:latest
+  command: -server -bootstrap -advertise 192.168.1.50
+  build: consul/
   ports:
   - "8300:8300"
   - "8400:8400"
@@ -43,7 +43,8 @@ haproxyexporter:
   - loadbalancer
 
 genisys:
-  image: cyberdynesystems/genisys:latest
+  # image: cyberdynesystems/genisys:latest
+  build: ../genisys/
   links:
   - consul
   - genisys-connector-docker
@@ -51,11 +52,13 @@ genisys:
   - "7001:7001"
   volumes:
   - "./genisys/config/genisys.yml:/app/genisys.yml"
+  - "./genisys/config/computes.py:/app/computes.py"
 
 genisys-connector-docker:
   image: cyberdynesystems/genisys-connector-docker:latest
+  # build: ../genisys-connector-docker/
   ports:
   - "7051:7051"
   volumes:
-  - "/var/run/docker.sock:/var/run/docker.sock"
+  - "/var/run/docker.sock:/tmp/docker.sock"
   - "./genisys-connector/config/genisys-connector.yml:/app/genisys-connector.yml"
