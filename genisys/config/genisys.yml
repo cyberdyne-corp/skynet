@@ -1,0 +1,23 @@
+genisys:
+    # Server address to bind to.
+  bind: 0.0.0.0
+
+  # Application port
+  port: 7001
+
+  # Path to compute definitions
+  compute_file: ./computes.py
+
+consul:
+  # Consul host
+  host: consul
+
+  # Consul port
+  port: 8500
+
+  # Prefix of services managed by genisys
+  service_prefix: 'skynet_'
+
+connector:
+  # How frequently to poll all connectors for service status
+  poll_interval: 15s

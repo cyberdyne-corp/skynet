@@ -1,0 +1,13 @@
+connector:
+  # Server address to bind to.
+  bind: 0.0.0.0
+
+  # Application port
+  port: 7051
+
+  # Path to compute definitions
+  service_file: ./services.py
+
+docker:
+  # URL of the Docker server
+  url: unix://tmp/docker.sock
