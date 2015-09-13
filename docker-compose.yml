@@ -7,7 +7,7 @@ loadbalancer:
   - "1936:1936"
 
 consul:
-  command: -server -bootstrap -advertise 192.168.1.50
+  command: -server -bootstrap -advertise ROUTABLE_IP
   build: consul/
   ports:
   - "8300:8300"
@@ -17,6 +17,7 @@ consul:
   volumes:
   - "/var/run/docker.sock:/var/run/docker.sock"
   - "./consul/config:/etc/consul"
+  dns: localhost
 
 registrator:
   command: consul://consul:8500
@@ -43,8 +44,7 @@ haproxyexporter:
   - loadbalancer
 
 genisys:
-  # image: cyberdynesystems/genisys:latest
-  build: ../genisys/
+  image: cyberdynesystems/genisys:latest
   links:
   - consul
   - genisys-connector-docker
@@ -56,7 +56,6 @@ genisys:
 
 genisys-connector-docker:
   image: cyberdynesystems/genisys-connector-docker:latest
-  # build: ../genisys-connector-docker/
   ports:
   - "7051:7051"
   volumes:
