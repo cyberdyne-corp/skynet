@@ -18,6 +18,9 @@ consul:
   # Prefix of services managed by genisys
   service_prefix: 'skynet_'
 
+  # Prefix for the resources keys associated to managed services
+  resources_key_prefix: 'skynet/resources/'
+
 connector:
   # How frequently to poll all connectors for service status
   poll_interval: 15s
