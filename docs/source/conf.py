@@ -48,8 +48,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Skynet'
-copyright = '2015, Anthony Lapenna, Rémi Fouilloux'
-author = 'Anthony Lapenna, Rémi Fouilloux'
+copyright = '2015, Anthony Lapenna, Remi Fouilloux'
+author = 'Anthony Lapenna, Remi Fouilloux'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
