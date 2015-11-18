@@ -1,8 +1,12 @@
 # docker-skynet
 
+[![Documentation Status](https://readthedocs.org/projects/skynet/badge/?version=latest)](http://skynet.readthedocs.org/en/latest/?badge=latest)
+
 A stack used to automatically register Docker container hosting webapps as services in Consul, distribute them using HAProxy and monitor it with Prometheus.
 
 # About
+
+Documentation is now available at readthedocs, for more details about this project go to http://skynet.readthedocs.org/en/latest
 
 Powered by the following tools:
 
