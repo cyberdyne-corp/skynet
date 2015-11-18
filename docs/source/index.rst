@@ -161,6 +161,8 @@ Use the following container packaged web application with the solution: `skynet-
 
 **WORK IN PROGRESS**
 
+You can still access the old wiki documentation for more information on blue-green deployment: https://github.com/cyberdyne-corp/skynet/wiki/Blue-green-deployment
+
 .. _Consul: https://www.consul.io/
 .. _Docker: https://www.docker.com/
 .. _Registrator: https://github.com/gliderlabs/registrator
